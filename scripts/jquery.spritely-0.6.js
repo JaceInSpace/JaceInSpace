@@ -63,6 +63,7 @@
             if (!$._spritely.instances[el_id]) {
                 return this;
             }
+            
             options = $.extend(options, $._spritely.instances[el_id] || {});
             if (options.play_frames && !$._spritely.instances[el_id]['remaining_frames']) {
                 $._spritely.instances[el_id]['remaining_frames'] = options.play_frames + 1;
