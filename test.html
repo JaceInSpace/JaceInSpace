@@ -9,7 +9,15 @@
         <!-- Load jQuery first before jQuery UI! -->
         <script src="JaceInSpace/script/js/jquery-3.2.1.js"></script>
         <script src="JaceInSpace/script/js/jquery-ui.js"></script>
+        <script>
+    $(document).ready(function() {
+        $('#dialog_window_1').dialog();
+    });
+</script>
     </head>
     <body>
+        <div id="dialog_window_1" class="dialog_window" title="This is our first dialog window">
+    <p>Hello World!</p>
+</div>
     </body>
 </html>
