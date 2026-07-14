@@ -433,6 +433,25 @@ body:active {
     animation-range: 650vh 850vh; /* 🛸 Launch window 3 */
 }
 
+@keyframes fadeAndSlide {
+    0% {
+        opacity: 0;
+        transform: translateY(50px); /* Slides up mildly as you travel */
+    }
+    15% {
+        opacity: 1;
+        transform: translateY(0); /* Clean, stable readability state */
+    }
+    85% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-50px); /* Fades away into deep space */
+    }
+}
+
 /* RELIABLE ELEMENT TIMELINES IN 10-PAGE WINDOW */
 .block-1 { animation-range: 100vh 200vh; }
 .block-2 { animation-range: 200vh 300vh; }
