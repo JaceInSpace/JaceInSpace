@@ -17,8 +17,6 @@ body {
     cursor: url("images/cursor.png") 0 18, auto;
 }
 
-}
-
 body::-webkit-scrollbar {
     display: none;
 }
@@ -31,8 +29,6 @@ body:active {
 .space-journey {
     height: 1000vh; 
     position: relative;
-    scroll-timeline-name: --cosmosTimeline;
-    scroll-timeline-axis: y;
 }
 
 .stars-bg {
@@ -276,7 +272,7 @@ body:active {
     display: flex;
     flex-direction: column;
     animation: countDistance linear both;
-    animation-timeline: --cosmosTimeline;
+    animation-timeline: scroll(root);
 }
 
 .digits-stream span {
@@ -310,7 +306,7 @@ body:active {
 .earth {
     top: 20vh;
     animation: moveEarth linear both;
-    animation-timeline: --cosmosTimeline;
+    animation-timeline: scroll(root);
     animation-range: 0vh 300vh;
 }
 
@@ -324,7 +320,7 @@ body:active {
     opacity: 0;
     transform: translate(-50%, 0) scale(0.1);
     animation: moveMoon linear both;
-    animation-timeline: --cosmosTimeline;
+    animation-timeline: scroll(root);
     animation-range: 700vh 1000vh;
 }
 @keyframes moveMoon {
@@ -348,7 +344,7 @@ body:active {
     
     /* Connects the layout engine to the main scroll timeline */
     animation: streamPast linear both;
-    animation-timeline: --cosmosTimeline;
+    animation-timeline: scroll(root);
 }
  
 /* --- NEON COCKPIT CONSOLE WINDOW --- */
@@ -444,3 +440,10 @@ body:active {
 .space-content { z-index: 4; }
 .cockpit-dashboard { z-index: 5; }
 .portfolio-nav { z-index: 1000; }
+
+html, body {
+    min-height: 1000vh !important;
+    height: auto !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
