@@ -14,7 +14,7 @@ body {
     color: white;
     font-family: 'Courier New', Courier, monospace;
     scrollbar-width: none; 
-    cursor: url("/Users/chocolaaaate/Library/CloudStorage/OneDrive-purdue.edu/code/personalwebsite/cursor.png") 0 18, auto;
+    cursor: url("images/cursor.png") 0 18, auto;
 }
 
 body::-webkit-scrollbar {
@@ -22,7 +22,7 @@ body::-webkit-scrollbar {
 }
 
 body:active {
-    cursor: url("/Users/chocolaaaate/Library/CloudStorage/OneDrive-purdue.edu/code/personalwebsite/cursor1.png") 12 12, auto;
+    cursor: url("images/cursor1.png") 12 12, auto;
 }
 
 /* MAX STABLE SCROLL RANGE FOR PURE CSS */
