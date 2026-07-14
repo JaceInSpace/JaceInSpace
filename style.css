@@ -31,6 +31,8 @@ body:active {
 .space-journey {
     height: 1000vh; 
     position: relative;
+    scroll-timeline-name: --cosmosTimeline;
+    scroll-timeline-axis: y;
 }
 
 .stars-bg {
@@ -274,7 +276,7 @@ body:active {
     display: flex;
     flex-direction: column;
     animation: countDistance linear both;
-    animation-timeline: scroll(root);
+    animation-timeline: --cosmosTimeline;
 }
 
 .digits-stream span {
@@ -308,7 +310,7 @@ body:active {
 .earth {
     top: 20vh;
     animation: moveEarth linear both;
-    animation-timeline: scroll(root);
+    animation-timeline: --cosmosTimeline;
     animation-range: 0vh 300vh;
 }
 
@@ -322,7 +324,7 @@ body:active {
     opacity: 0;
     transform: translate(-50%, 0) scale(0.1);
     animation: moveMoon linear both;
-    animation-timeline: scroll(root);
+    animation-timeline: --cosmosTimeline;
     animation-range: 700vh 1000vh;
 }
 @keyframes moveMoon {
@@ -346,7 +348,7 @@ body:active {
     
     /* Connects the layout engine to the main scroll timeline */
     animation: streamPast linear both;
-    animation-timeline: scroll(root);
+    animation-timeline: --cosmosTimeline;
 }
  
 /* --- NEON COCKPIT CONSOLE WINDOW --- */
