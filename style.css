@@ -1,0 +1,442 @@
+/* --- GLOBAL STYLES & CUSTOM CURSOR --- */
+html {
+    scroll-behavior: smooth; /* Enables smooth transitions when nav items are clicked */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    scrollbar-width: none; 
+    cursor: url("/Users/chocolaaaate/Library/CloudStorage/OneDrive-purdue.edu/code/personalwebsite/cursor.png") 0 18, auto;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+body:active {
+    cursor: url("/Users/chocolaaaate/Library/CloudStorage/OneDrive-purdue.edu/code/personalwebsite/cursor1.png") 12 12, auto;
+}
+
+/* MAX STABLE SCROLL RANGE FOR PURE CSS */
+.space-journey {
+    height: 1000vh; 
+    position: relative;
+}
+
+.stars-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to bottom, #000000, #050510);
+    z-index: 1;
+}
+
+/* INVISIBLE SCROLL FLAGS MECHANISM */
+.scroll-flag {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* --- RIGHT-SIDE TACTICAL 2x2 NAVIGATION GRID --- */
+.portfolio-nav {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(140px, auto)); /* Creates exactly 2 equal columns */
+    grid-template-rows: repeat(2, auto);             /* Creates exactly 2 rows */
+    gap: 10px; /* Clean grid instrument spacing */
+    
+    background: rgba(0, 10, 10, 0.85);
+    border: 1px solid rgba(0, 255, 204, 0.4);
+    border-right: 3px solid #00ffcc; /* Swapped accent bar to the right edge to anchor the layout */
+    padding: 12px;
+    border-radius: 4px;
+    pointer-events: auto;
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.1);
+}
+
+/* Ensure buttons stay completely uniform inside the grid slots */
+.portfolio-nav a {
+    color: #00ffcc;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    padding: 12px 16px;
+    background: rgba(0, 40, 40, 0.25);
+    border: 1px solid rgba(0, 255, 204, 0.3);
+    transition: all 0.12s ease-in-out;
+    white-space: nowrap;
+    text-align: center; /* Centers text inside each grid tile */
+    display: block;
+}
+
+.portfolio-nav a:hover {
+    background: #00ffcc;
+    color: #000;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' style='font-size:18px;'><text y='18'>🚀</text></svg>") 0 18, pointer;
+}
+
+/* ⚡ DIGITAL COCKPIT FLASH TRIGGER */
+.portfolio-nav a:active {
+    animation: hudButtonFlash 0.35s ease-out forwards;
+}
+@keyframes hudButtonFlash {
+    0% {
+        background: #00ffcc;
+        color: #000;
+        /* Intense initial bloom outward */
+        box-shadow: 0 0 40px #00ffcc, 
+                    inset 0 0 20px #ffffff;
+        border-color: #ffffff;
+    }
+    20% {
+        background: rgba(0, 255, 204, 0.6);
+        color: #fff;
+        box-shadow: 0 0 25px #00ffcc;
+    }
+    100% {
+        /* Smoothly decay back into the glowing active button appearance */
+        background: rgba(0, 40, 40, 0.4);
+        color: #00ffcc;
+        box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+        border-color: #00ffcc;
+    }
+}
+
+
+/* --- THE FIXED COCKPIT HORIZON CONSOLE PANEL --- */
+.cockpit-dashboard {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    pointer-events: none; 
+    width: 95% !important;
+    max-width: 1200px !important; 
+    
+    display: flex !important;
+    flex-direction: row !important; 
+    justify-content: space-between !important; 
+    
+    /* 💥 FORCE EQUAL HEIGHT LOCKDOWN 
+       This tells the browser to stretch BOTH panels to the exact height of 
+       whichever box takes up the most vertical space.
+    */
+    align-items: stretch !important; 
+}
+
+/* Internal Layout Compartments */
+.terminal-header-zone {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pilot-signature {
+    font-size: 11px;
+    color: #00ffcc;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 0 0 8px rgba(0, 255, 204, 0.4);
+    text-transform: uppercase;
+}
+
+/* Tactical Cross-Section Horizon Line */
+.terminal-divider-line {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, rgba(0, 255, 204, 0.5), rgba(0, 255, 204, 0.05));
+}
+
+.terminal-data-zone {
+    display: flex;
+    flex-direction: column; /* 👈 Changed from row to stack them top-to-bottom */
+    align-items: flex-start; /* Aligns both the text and numbers to the left */
+    gap: 4px; /* Creates a clean, tight gap between the label and the numbers */
+}
+
+.label {
+    font-size: 9px;
+    color: #888;
+    letter-spacing: 1px;
+    margin-bottom: 0; /* Clears vertical padding displacement */
+}
+
+
+/* Blinking Status light indicator on control console */
+/*.panel-status-light {
+    width: 8px;
+    height: 8px;
+    background-color: #00ffcc;
+    border-radius: 50%;
+    margin-right: 8px;
+    box-shadow: 0 0 8px #00ffcc;
+    animation: blink 1.5s infinite ease-in-out;
+}
+@keyframes blink {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; box-shadow: 0 0 12px #00ffcc; }
+}
+*/
+
+.panel-status-smiley {
+    font-family: monospace; /* Keeps characters perfectly aligned */
+    font-size: 15px;
+    font-weight: bold;
+    color: #00ffcc;
+    margin-right: 4px; /* Keeps a clean, small gap before your name */
+    
+    /* Applies a smooth breathing pulse to the text opacity and glow */
+    animation: smileyPulse 2.5s infinite ease-in-out;
+}
+
+@keyframes smileyPulse {
+    0%, 100% { 
+        opacity: 0.35; 
+        text-shadow: 0 0 2px rgba(0, 255, 204, 0.2);
+    }
+    50% { 
+        opacity: 1; 
+        /* Creates an intense neon bloom at peak pulse */
+        text-shadow: 0 0 8px rgba(0, 255, 204, 0.9), 
+                     0 0 15px rgba(0, 255, 204, 0.4);
+    }
+}
+
+.distance-counter {
+    background: rgba(0, 10, 10, 0.85) !important; 
+    backdrop-filter: blur(8px) !important;         
+    -webkit-backdrop-filter: blur(8px) !important;
+    
+    border: 1px solid rgba(0, 255, 204, 0.4) !important;
+    border-left: 3px solid #00ffcc !important; 
+    
+    /* Reduced internal padding to keep the text compact and uniform */
+    padding: 10px 18px !important; 
+    border-radius: 4px !important;
+    pointer-events: auto;
+    
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.1),
+                inset 0 0 15px rgba(0, 255, 204, 0.05) !important;
+    
+    min-width: 260px;
+    
+    /* 💥 REMOVED FIX HEIGHT AND LET THE DASHBOARD STRETCH RULE CONTROL IT */
+    height: auto !important; 
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important; 
+}
+
+.label {
+    font-size: 11px;
+    color: #888;
+    display: block;
+    margin-bottom: 5px;
+    letter-spacing: 2px;
+}
+.odometer-container {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.subs-odometer {
+    font-size: 18px; /* Slightly adjusted scale to fit beautifully in the compact container */
+    font-weight: bold;
+    color: #00ffcc;
+}
+
+.unit {
+    color: rgba(0, 255, 204, 0.6); 
+    font-size: 10px; 
+    letter-spacing: 0.5px;
+    font-weight: bold;
+}
+.digits-stream {
+    display: flex;
+    flex-direction: column;
+    animation: countDistance linear both;
+    animation-timeline: scroll(root);
+}
+
+.digits-stream span {
+    height: 24px;
+    line-height: 24px;
+}
+
+@keyframes countDistance {
+    to { transform: translateY(-240px); } 
+}
+
+
+/* --- CELESTIAL OBJECTS BASE --- */
+.planet {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+}
+
+.planet img { 
+    width: 500px; 
+    height: auto; 
+    border-radius: 50%; 
+}
+
+/* EARTH ANIMATION (Pages 1-3) */
+.earth {
+    top: 20vh;
+    animation: moveEarth linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0vh 300vh;
+}
+
+@keyframes moveEarth {
+    to { transform: translate(-50%, 120vh) scale(0.3); opacity: 0; }
+}
+
+/* MOON ANIMATION (Pages 7-10) */
+.moon {
+    top: -60vh;
+    opacity: 0;
+    transform: translate(-50%, 0) scale(0.1);
+    animation: moveMoon linear both;
+    animation-timeline: scroll(root);
+    animation-range: 700vh 1000vh;
+}
+@keyframes moveMoon {
+    0% { opacity: 0; transform: translate(-50%, 0) scale(0.1); }
+    80% { opacity: 1; }
+    100% { top: 10vh; opacity: 1; transform: translate(-50%, 0) scale(1); }
+}
+
+
+.space-content {
+    position: fixed;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%); /* Locks the operational center point */
+    width: 90%;
+    max-width: 650px;
+    z-index: 4;
+    opacity: 0;
+    text-align: left; 
+    pointer-events: none;
+    
+    /* Connects the layout engine to the main scroll timeline */
+    animation: streamPast linear both;
+    animation-timeline: scroll(root);
+}
+ 
+/* --- NEON COCKPIT CONSOLE WINDOW --- */
+.test-box {
+    position: relative;
+    /* Glassmorphism terminal tint */
+    background: rgba(0, 15, 15, 0.65); 
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    
+    /* Cyber Glowing Borders */
+    border: 2px solid #00ffcc;
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.2), 
+                inset 0 0 15px rgba(0, 255, 204, 0.1);
+                
+    padding: 35px;
+    border-radius: 4px; /* Angular sharp corners instead of round curves */
+    pointer-events: auto; /* Makes text select and inner card buttons clickable */
+    overflow: hidden;
+}
+
+/* Upper Right Dashboard Status Accent */
+.test-box::before {
+    content: "SYSTEM STATUS: ACTIVE";
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 9px;
+    color: rgba(0, 255, 204, 0.5);
+    letter-spacing: 1px;
+}
+
+/* Glowing Title Text Headers */
+.test-box h3 {
+    color: #00ffcc;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed rgba(0, 255, 204, 0.3);
+    padding-bottom: 8px;
+    text-shadow: 0 0 8px rgba(0, 255, 204, 0.6);
+}
+
+.test-box p {
+    color: #e0ffff;
+    line-height: 1.6;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+@keyframes streamPast {
+    0% { 
+        opacity: 0; 
+        /* Enter from high up on the screen, slightly scaled down */
+        transform: translate(-50%, -120%) scale(0.85); 
+    }
+    /* Peak Focus Window: Locks dead-center on the view screen */
+    45%, 55% { 
+        opacity: 1; 
+        transform: translate(-50%, -50%) scale(1); 
+        pointer-events: auto; /* Clickable ONLY when locked in center */
+    }
+    100% { 
+        opacity: 0; 
+        /* Exit smoothly out the bottom, dropping behind the dashboard */
+        transform: translate(-50%, 20%) scale(1.05); 
+    }
+}
+
+/* RELIABLE ELEMENT TIMELINES IN 10-PAGE WINDOW */
+.block-1 { animation-range: 100vh 200vh; }
+.block-2 { animation-range: 200vh 300vh; }
+.block-3 { animation-range: 300vh 400vh; }
+.block-4 { animation-range: 400vh 500vh; }
+.block-5 { animation-range: 500vh 600vh; }
+.block-6 { animation-range: 600vh 700vh; }
+.block-7 { animation-range: 700vh 800vh; }
+.block-8 { animation-range: 800vh 900vh; }
+
+#warp-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2; /* Sits right above your static stars-bg background */
+    pointer-events: none; /* Allows clicks to pass through to your portfolio links */
+}
+
+/* Ensure your text and planet layers sit above the moving stars */
+.planet { z-index: 3; }
+.space-content { z-index: 4; }
+.cockpit-dashboard { z-index: 5; }
+.portfolio-nav { z-index: 1000; }
