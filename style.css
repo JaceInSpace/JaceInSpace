@@ -22,7 +22,7 @@ body::-webkit-scrollbar {
 }
 
 body:active {
-    cursor: url("images/cursor1.png") 12 12, auto;
+    cursor: url("images/cursor1.png") 0 18, auto;
 }
 
 /* MAX STABLE SCROLL RANGE FOR PURE CSS */
@@ -364,6 +364,11 @@ body:active {
     border-radius: 4px; /* Angular sharp corners instead of round curves */
     pointer-events: auto; /* Makes text select and inner card buttons clickable */
     overflow: hidden;
+
+    position: relative;
+    z-index: 50 !important; /* Forces text boxes to float comfortably above background art */
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 /* Upper Right Dashboard Status Accent */
