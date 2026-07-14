@@ -1,32 +1,248 @@
-<!DOCTYPE>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <!-- webpage formatting -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- browser tab logo and title -->
-  <link rel="icon" type="image/png" href="images/j-logo.png">
-  <title> Jace In Space </title>
-  <!-- webpage formatting -->
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f4f4f4;
-      padding: 50px;
-      background-image: url('images/space painting.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      }
-    h1 {
-            color: #333;
-      }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jace In Space: Portfolio</title>
+    <link rel="stylesheet" href="odometer.css" />
+    <link rel="stylesheet" href="style.css">
 </head>
-<bodyd>
-  <h1> <img src="images/J-biglogo.png">ASON <img src="images/J-biglogo.png" alt="Flipped Image" style="transform: scaleX(-1);">EE </h1>
-  <p> Hi! Welcome to my page! </p>
+<body>
+ 
+    <div class="cockpit-hud-frame">
+        <div class="hud-top-bracket"></div>
+        <div class="hud-side-bracket left"></div>
+        <div class="hud-side-bracket right"></div>
+    </div>
+ 
+<div class="cockpit-dashboard">
+        
+        <div class="distance-counter">
+            
+            <div class="terminal-header-zone">
+                <!--<div class="panel-status-light"></div>0-->
+                <span class="panel-status-smiley">🚀</span>
+                <span class="pilot-signature">PILOT // JASON LEE</span>
+            </div>
+
+            <div class="terminal-divider-line"></div>
+
+            <div class="terminal-data-zone">
+                <span class="label">DISTANCE TRAVELED</span>
+                <div class="odometer-container">
+                    <span class="subs-odometer">0</span>
+                    <span class="unit">KM</span>
+                </div>
+            </div>
+
+        </div>
+
+        <nav class="portfolio-nav cockpit-console-panel">
+            <a href="#launchpad" class="hud-btn"><span class="btn-num">01</span> SYS_HOME</a>
+            <a href="#about-target" class="hud-btn"><span class="btn-num">02</span> NAV_ABOUT</a>
+            <a href="#projects-target" class="hud-btn"><span class="btn-num">03</span> NAV_PROJ</a>
+            <a href="#cv-target" class="hud-btn"><span class="btn-num">04</span> SYS_TERM</a>
+        </nav>
+
+    </div>
+ 
+    <div class="space-journey">
+        
+        <div class="stars-bg"></div>
+        <canvas id="warp-canvas"></canvas>
+ 
+        <div id="launchpad" class="scroll-flag" style="top: 0vh;"></div>
+        <div id="about-target" class="scroll-flag" style="top: 250vh;"></div>
+        <div id="projects-target" class="scroll-flag" style="top: 550vh;"></div>
+        <div id="cv-target" class="scroll-flag" style="top: 850vh;"></div>
+ 
+        <div class="planet earth">
+            <img src="/Users/chocolaaaate/Library/CloudStorage/OneDrive-purdue.edu/code/personalwebsite/earth.png" alt="Earth">
+
+        </div>
+ 
+        <div class="space-content block-1">
+            <div class="test-box"><p>Ignition - Liftoff!</p></div>
+        </div>
+        
+        <div class="space-content block-2">
+            <div class="test-box">
+                <h3>About Me</h3>
+                <p>I am a first year PhD student at Purdue University studying Planetary Science!
+                </p>
+                <p>In my previous life, I used to be a Rocket Engineer... </p>
+                <p>...but after years of working in the desert under Moonlight...</p>
+                <p>...I now work on the Moon!</p>
+                <p>...remotely! :]</p>
+            </div>
+        </div>
+        
+        <div class="space-content block-3">
+            <div class="test-box"><p>Cruising past satellite networks...</p></div>
+        </div>
+        <div class="space-content block-4">
+            <div class="test-box"><h3>Milestone 04</h3><p>Entering deep space fields.</p></div>
+        </div>
+ 
+        <div class="space-content block-5">
+            <div class="test-box">
+                <h3>Stellar Projects</h3>
+                <p>Check out the applications I've launched across the web ecosystem.</p>
+            </div>
+        </div>
+        
+        <div class="space-content block-6">
+            <div class="test-box"><h3>Milestone 06</h3><p>Cosmic radiation shielding at 100%.</p></div>
+        </div>
+        
+        <div class="space-content block-7">
+            <div class="test-box"><h3>Milestone 07</h3><p>Lunar gravity pull detected.</p></div>
+        </div>
+ 
+        <div class="space-content block-8">
+            <div class="test-box">
+                <h3>Establish Contact</h3>
+                <p>Send a transmission down the array to connect on your next project.</p>
+            </div>
+        </div>
+ 
+        <div class="planet moon">
+            <img src="/Users/chocolaaaate/Library/CloudStorage/OneDrive-purdue.edu/code/personalwebsite/moon.png" alt="Moon">
+            <h2>Welcome to the Moon</h2>
+        </div>
+ 
+        <div style="height: 1000vh; visibility: hidden; pointer-events: none;"></div>
+ 
+    </div>
+
+    <script src="odometer.js"></script>
+
+    <script>
+        // 1. Initialize Odometer Ticker
+        const subsOdometer = document.querySelector(".subs-odometer");
+        const odometer = new Odometer({
+            el: subsOdometer,
+            value: 0,
+            format: '(,ddd)', 
+            theme: 'minimal',
+            duration: 400 
+        });
+
+        const TOTAL_DISTANCE = 384400;
+
+        // 2. Continuous Scroll Monitoring Loop
+        const engineCore = () => {
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            if (maxScroll <= 0) return;
+
+            const scrollRatio = window.scrollY / maxScroll;
+
+            // Update Odometer Metrics
+            const currentKm = Math.floor(scrollRatio * TOTAL_DISTANCE);
+            odometer.update(currentKm);
+
+            // Safari Fallback CSS Engine Variable
+            document.documentElement.style.setProperty('--scroll-percent', `${scrollRatio * 100}%`);
+        };
+
+        window.addEventListener('scroll', engineCore);
+        window.addEventListener('resize', engineCore);
+        engineCore(); // Initialize on boot
+    </script>
+ 
+<script>
+const canvas = document.getElementById('warp-canvas');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+const numStars = 150;
+const stars = [];
+let scrollVelocity = 0;
+let lastScrollY = window.scrollY;
+
+// Initialize Stars
+for (let i = 0; i < numStars; i++) {
+    stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        // Set base speed to 0 so they don't drift on their own
+        speedMultiplier: Math.random() * 1.5 + 0.5, 
+        size: Math.random() * 1.5 + 0.5
+    });
+}
+
+// Track Scroll Speed / Velocity
+window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+    const delta = currentScrollY - lastScrollY;
+    
+    // Give it a strong kick of velocity on scroll
+    scrollVelocity += Math.abs(delta) * 0.25; 
+    
+    lastScrollY = currentScrollY;
+});
+
+// Animation Loop
+function animateSpace() {
+    // If there is zero velocity, clear the canvas completely to keep stars crisp dots.
+    // If we are scrolling, use the transparent fill to create the streak trails.
+    if (scrollVelocity > 0.1) {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'; 
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    ctx.fillStyle = '#ffffff';
+
+    for (let i = 0; i < stars.length; i++) {
+        let star = stars[i];
+
+        // Speed is entirely dependent on scroll velocity now
+        let currentSpeed = scrollVelocity * star.speedMultiplier;
+        
+        ctx.beginPath();
+        // Only draw streaks if moving fast enough
+        if (scrollVelocity > 1.5) {
+            ctx.strokeStyle = `rgba(255, 255, 255, ${Math.min(star.size, 1)})`;
+            ctx.lineWidth = star.size;
+            ctx.moveTo(star.x, star.y);
+            ctx.lineTo(star.x, star.y + currentSpeed * 0.3); 
+            ctx.stroke();
+        } else {
+            ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // Apply movement
+        star.y += currentSpeed;
+
+        // Recycle stars to the top or bottom edge depending on travel direction
+        if (star.y > canvas.height) {
+            star.y = 0;
+            star.x = Math.random() * canvas.width;
+        } else if (star.y < 0) {
+            star.y = canvas.height;
+            star.x = Math.random() * canvas.width;
+        }
+    }
+
+    // Bring the stars to a quick, snappy halt when scrolling stops
+    scrollVelocity *= 0.85;
+    if (scrollVelocity < 0.05) scrollVelocity = 0;
+
+    requestAnimationFrame(animateSpace);
+}
+
+animateSpace();
+
+</script>
+
 </body>
 </html>
