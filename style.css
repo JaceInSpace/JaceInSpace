@@ -415,6 +415,24 @@ body:active {
     }
 }
 
+.about-box {
+    animation: fadeAndSlide linear both;
+    animation-timeline: scroll(root);
+    animation-range: 250vh 500vh; /* 🛸 Launch window 1 */
+}
+
+.experience-box {
+    animation: fadeAndSlide linear both;
+    animation-timeline: scroll(root);
+    animation-range: 450vh 700vh; /* 🛸 Launch window 2 */
+}
+
+.projects-box {
+    animation: fadeAndSlide linear both;
+    animation-timeline: scroll(root);
+    animation-range: 650vh 850vh; /* 🛸 Launch window 3 */
+}
+
 /* RELIABLE ELEMENT TIMELINES IN 10-PAGE WINDOW */
 .block-1 { animation-range: 100vh 200vh; }
 .block-2 { animation-range: 200vh 300vh; }
