@@ -14,7 +14,12 @@ body {
     color: white;
     font-family: 'Courier New', Courier, monospace;
     scrollbar-width: none; 
+    min-height: 1050vh !important
     cursor: url("images/cursor.png") 0 18, auto;
+}
+
+section {
+    height: 200vh !important; /* Stretches sections so they build up total page depth */
 }
 
 body::-webkit-scrollbar {
