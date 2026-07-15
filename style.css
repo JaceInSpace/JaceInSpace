@@ -345,17 +345,9 @@ body:active {
     width: 90%;
     max-width: 650px;
     z-index: 4;
-    opacity: 0;
+    opacity: 0; /* Keeps them safely hidden until their timeline starts */
     text-align: left; 
     pointer-events: none;
-    
-    /* 🛸 THE SAFARI-SAFE EXPLICIT BINDING */
-    animation-name: streamPast;
-    animation-timing-function: linear;
-    animation-fill-mode: both;
-    
-    /* Explicitly declare the scroll source */
-    animation-timeline: scroll(nearest); /* Changing 'root' to 'nearest' is much safer for the Safari polyfill! */
 }
  
 /* --- NEON COCKPIT CONSOLE WINDOW --- */
@@ -464,14 +456,46 @@ body:active {
 }
 
 /* RELIABLE ELEMENT TIMELINES IN 10-PAGE WINDOW */
-.block-1 { animation-range: 10% 20%; } /* Was 100vh 200vh */
-.block-2 { animation-range: 20% 30%; } /* Was 200vh 300vh */
-.block-3 { animation-range: 30% 40%; } /* Was 300vh 400vh */
-.block-4 { animation-range: 40% 50%; } /* Was 400vh 500vh */
-.block-5 { animation-range: 50% 60%; } /* Was 500vh 600vh */
-.block-6 { animation-range: 60% 70%; } /* Was 600vh 700vh */
-.block-7 { animation-range: 70% 80%; } /* Was 700vh 800vh */
-.block-8 { animation-range: 80% 90%; } /* Was 800vh 900vh */
+.block-1 { 
+    animation: streamPast linear both;
+    animation-timeline: scroll(root);
+    animation-range: 10% 20%; 
+}
+.block-2 { 
+    animation: streamPast linear both;
+    animation-timeline: scroll(root);
+    animation-range: 20% 30%; 
+}
+.block-3 { 
+    animation: streamPast linear both;
+    animation-timeline: scroll(root);
+    animation-range: 30% 40%; 
+}
+.block-4 { 
+    animation: streamPast linear both;
+    animation-timeline: scroll(root);
+    animation-range: 40% 50%; 
+}
+.block-5 { 
+    animation: streamPast linear both;
+    animation-timeline: scroll(root);
+    animation-range: 50% 60%; 
+}
+.block-6 { 
+    animation: streamPast linear both;
+    animation-timeline: scroll(root);
+    animation-range: 60% 70%; 
+}
+.block-7 { 
+    animation: streamPast linear both;
+    animation-timeline: scroll(root);
+    animation-range: 70% 80%; 
+}
+.block-8 { 
+    animation: streamPast linear both;
+    animation-timeline: scroll(root);
+    animation-range: 80% 90%; 
+}
 
 #warp-canvas {
     position: fixed;
