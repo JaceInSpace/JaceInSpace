@@ -341,7 +341,7 @@ body:active {
     position: fixed;
     top: 50%; 
     left: 50%;
-    transform: translate(-50%, -50%); /* Locks the operational center point */
+    transform: translate(-50%, -50%);
     width: 90%;
     max-width: 650px;
     z-index: 4;
@@ -349,9 +349,13 @@ body:active {
     text-align: left; 
     pointer-events: none;
     
-    /* Connects the layout engine to the main scroll timeline */
-    animation: streamPast linear both;
-    animation-timeline: scroll(root);
+    /* 🛸 THE SAFARI-SAFE EXPLICIT BINDING */
+    animation-name: streamPast;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    
+    /* Explicitly declare the scroll source */
+    animation-timeline: scroll(nearest); /* Changing 'root' to 'nearest' is much safer for the Safari polyfill! */
 }
  
 /* --- NEON COCKPIT CONSOLE WINDOW --- */
