@@ -314,7 +314,7 @@ body:active {
     top: 20vh;
     animation: moveEarth linear both;
     animation-timeline: scroll(root);
-    animation-range: 0vh 300vh;
+    animation-range: 0% 30%; /* WAS: 0vh 300vh */
 }
 
 @keyframes moveEarth {
@@ -328,7 +328,7 @@ body:active {
     transform: translate(-50%, 0) scale(0.1);
     animation: moveMoon linear both;
     animation-timeline: scroll(root);
-    animation-range: 700vh 1000vh;
+    animation-range: 70% 100%; /* WAS: 700vh 1000vh */
 }
 @keyframes moveMoon {
     0% { opacity: 0; transform: translate(-50%, 0) scale(0.1); }
