@@ -87,13 +87,19 @@ body:active {
     background: #00ffcc;
     color: #000;
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
-    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' style='font-size:18px;'><text y='18'>🚀</text></svg>") 0 18, pointer;
+    
+    /* Keep your exact standard custom cursor on hover */
+    cursor: url("images/cursor.png") 0 18, pointer;
 }
 
-/* ⚡ DIGITAL COCKPIT FLASH TRIGGER */
+/* --- ADD A SPECIFIC ACTIVE HOVER STATE FOR CLICKING LINKS --- */
 .portfolio-nav a:active {
     animation: hudButtonFlash 0.35s ease-out forwards;
+    
+    /* Keeps the active "clicking" cursor active when pressing down on links */
+    cursor: url("images/cursor1.png") 0 18, pointer;
 }
+
 @keyframes hudButtonFlash {
     0% {
         background: #00ffcc;
