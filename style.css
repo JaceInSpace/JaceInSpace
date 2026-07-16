@@ -297,6 +297,82 @@ body:active {
     to { transform: translateY(-240px); } 
 }
 
+/* --- HUD PANEL OUTER CONTAINER --- */
+.hud-panel {
+    display: flex;
+    flex-direction: row;       /* Places your stats left, button right */
+    justify-content: space-between; /* Pushes them to opposite sides */
+    align-items: center;       /* Vertically aligns the circle with your stats */
+    gap: 25px;                 /* Clean visual spacing gap between instruments */
+    
+    padding: 15px 20px;
+    background: rgba(0, 10, 10, 0.75);
+    border: 1px solid rgba(0, 255, 204, 0.2);
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+/* Keeps your existing vertical elements formatting cleanly on the left */
+.terminal-left-instruments {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;              /* Allows your current layout to scale naturally */
+}
+
+/* 🚨 COMPACT CIRCULAR LAUNCH BUTTON */
+.launch-btn-circular {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Perfect compact circular proportions */
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    
+    /* Prevents the parent flexbox from squeezing the circle into an oval */
+    flex-shrink: 0; 
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    
+    /* Interface style */
+    font-family: monospace;
+    font-size: 8px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-align: center;
+    
+    /* Alert red glow scheme */
+    color: #ff3366;
+    background: rgba(255, 51, 102, 0.05);
+    border: 2px solid rgba(255, 51, 102, 0.3);
+    box-shadow: 0 0 8px rgba(255, 51, 102, 0.1);
+    
+    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Hover: Charging status */
+.launch-btn-circular:hover {
+    color: #ffffff;
+    background: rgba(255, 51, 102, 0.15);
+    border-color: #ff3366;
+    box-shadow: 0 0 15px rgba(255, 51, 102, 0.5), inset 0 0 8px rgba(255, 51, 102, 0.2);
+    transform: scale(1.08);
+    
+    /* Custom UI Cursor compatibility */
+    cursor: url("images/cursor.png") 0 18, pointer;
+}
+
+/* Active click: Depress switch state */
+.launch-btn-circular:active {
+    transform: scale(0.92);
+    background: #ff3366;
+    color: #000000;
+    box-shadow: 0 0 25px rgba(255, 51, 102, 0.8);
+    
+    cursor: url("images/cursor1.png") 0 18, pointer;
+}
 
 /* --- CELESTIAL OBJECTS BASE --- */
 .planet {
