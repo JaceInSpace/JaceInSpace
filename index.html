@@ -166,19 +166,18 @@ function resizeCanvas() {
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
-const numStars = 200; // Bumped up slightly for a denser 3D depth effect
+const numStars = 350; // Increased density for a seamless, continuous look
 const stars = [];
-const MAX_DEPTH = 1000; // Outer horizon boundary
+const MAX_DEPTH = 1000; 
 let scrollVelocity = 0;
 let lastScrollY = window.scrollY;
 
-// Initialize Stars in 3D Space
+// Initialize Stars randomly distributed across the entire 3D tunnel
 for (let i = 0; i < numStars; i++) {
     stars.push({
-        // X and Y are distances from the center point of the screen
         x: (Math.random() - 0.5) * canvas.width * 2,
         y: (Math.random() - 0.5) * canvas.height * 2,
-        z: Math.random() * MAX_DEPTH, // Distributed randomly through depth layers
+        z: Math.random() * MAX_DEPTH, // Scattered perfectly from front to back
         size: Math.random() * 1.5 + 0.5
     });
 }
@@ -188,15 +187,12 @@ window.addEventListener('scroll', () => {
     const currentScrollY = window.scrollY;
     const delta = currentScrollY - lastScrollY;
     
-    // Keeps sign (Positive = Forward/Down, Negative = Reverse/Up)
     scrollVelocity += delta * 0.25; 
-    
     lastScrollY = currentScrollY;
 });
 
 // Animation Loop
 function animateSpace() {
-    // Transparent layer for motion blur during fast motion, clean wipe when stationary
     if (Math.abs(scrollVelocity) > 0.1) {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'; 
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -206,25 +202,24 @@ function animateSpace() {
 
     ctx.fillStyle = '#ffffff';
 
-    // Establish the operational center point of the screen
     const cx = canvas.width / 2;
     const cy = canvas.height / 2;
 
     for (let i = 0; i < stars.length; i++) {
         let star = stars[i];
 
-        // 🏎️ Apply velocity directly to depth (Z-axis)
-        // Scrolling down subtracts from Z (stars rush towards you)
-        // Scrolling up adds to Z (stars recede away from you)
+        // Apply depth velocity
         star.z -= scrollVelocity * 1.2;
 
-        // 🔄 Recycle boundaries if star passes camera or drops off deep space horizon
+        // 🔄 THE SEAMLESS FIX: Randomize the respawn depth layer!
+        // Instead of resetting exactly to MAX_DEPTH or 1, we add a random offset 
+        // so stars don't form a repeating "wall" or ring.
         if (star.z <= 0) {
-            star.z = MAX_DEPTH;
+            star.z = MAX_DEPTH - (Math.random() * 200); // Spreads out the forward entry wall
             star.x = (Math.random() - 0.5) * canvas.width * 2;
             star.y = (Math.random() - 0.5) * canvas.height * 2;
         } else if (star.z > MAX_DEPTH) {
-            star.z = 1; // Re-emerge right at the lens center
+            star.z = 1 + (Math.random() * 200); // Spreads out the reverse entry core
             star.x = (Math.random() - 0.5) * canvas.width * 2;
             star.y = (Math.random() - 0.5) * canvas.height * 2;
         }
@@ -234,22 +229,19 @@ function animateSpace() {
         const sx = star.x * k + cx;
         const sy = star.y * k + cy;
 
-        // Skip calculations if projected coordinates land outside layout view ports
         if (sx < 0 || sx > canvas.width || sy < 0 || sy > canvas.height) {
             continue;
         }
 
-        // Stars scale larger dynamically the closer they get to the front camera glass
         const currentSize = (1 - star.z / MAX_DEPTH) * star.size * 2.5;
 
         ctx.beginPath();
         
-        // Render Streak Lines under heavy acceleration loads
+        // Render Streak Lines under acceleration
         if (Math.abs(scrollVelocity) > 1.5) {
             ctx.strokeStyle = `rgba(255, 255, 255, ${Math.min(1 - star.z / MAX_DEPTH, 1)})`;
             ctx.lineWidth = currentSize;
             
-            // Calculate previous frame coordinates based on velocity offsets
             const prevZ = star.z + (scrollVelocity * 0.4);
             const prevK = 128 / prevZ;
             const px = star.x * prevK + cx;
@@ -259,13 +251,11 @@ function animateSpace() {
             ctx.lineTo(sx, sy);
             ctx.stroke();
         } else {
-            // Normal cruise rendering loops
             ctx.arc(sx, sy, currentSize, 0, Math.PI * 2);
             ctx.fill();
         }
     }
 
-    // Decay parameters to lock movement gracefully when wheel scrolling stops
     scrollVelocity *= 0.85;
     if (Math.abs(scrollVelocity) < 0.05) scrollVelocity = 0;
 
