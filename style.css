@@ -421,7 +421,7 @@ body:active {
 
 .space-content {
     position: fixed;
-    top: 30%; 
+    top: 45%; 
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90%;
@@ -680,11 +680,18 @@ html, body {
     
     /* Ensure text panels fit on tight phone displays */
     .test-box {
-        padding: 20px;
+        padding: 15px;
         width: 95%;
     }
     
     .test-box h3 {
         font-size: 16px;
+    }
+
+    .space-content {
+        top: 35%; /* Pulls it up just for mobile so it doesn't crash into the HUD */
+        
+        /* Optional: Shrink padding or text slightly on mobile to save space */
+        width: 95%;
     }
 }
