@@ -21,22 +21,28 @@
 <div class="cockpit-dashboard">
         
         <div class="distance-counter">
-            
-            <div class="terminal-header-zone">
-                <!--<div class="panel-status-light"></div>0-->
-                <span class="panel-status-smiley">🚀</span>
-                <span class="pilot-signature">PILOT // JASON LEE</span>
-            </div>
+            <div class="hud-panel">
+    
+    <div class="terminal-left-instruments">
+        <div class="terminal-header-zone">
+            <span class="pilot-signature">PILOT // JASON LEE</span>
+        </div>
 
-            <div class="terminal-divider-line"></div>
+        <div class="terminal-divider-line"></div>
 
-            <div class="terminal-data-zone">
-                <span class="label">DISTANCE TRAVELED</span>
-                <div class="odometer-container">
-                    <span class="subs-odometer">0</span>
-                    <span class="unit">KM</span>
-                </div>
+        <div class="terminal-data-zone">
+            <span class="label">DISTANCE TRAVELED</span>
+            <div class="odometer-container">
+                <span class="subs-odometer">0</span>
+                <span class="unit">KM</span>
             </div>
+        </div>
+    </div>
+    <a href="#launch" class="next-stage-arrow launch-btn-circular">
+        LAUNCH
+    </a>
+
+</div>
 
         </div>
 
@@ -53,21 +59,28 @@
         
         <div class="stars-bg"></div>
         <canvas id="warp-canvas"></canvas>
- 
+        <div id="launch" class="scroll-flag" style="top: 14%;"></div>
         <div id="launchpad" class="scroll-flag" style="top: 0%;"></div>
         <div id="about-target" class="scroll-flag" style="top: 22%;"></div>
+        <div id="about1-target" class="scroll-flag" style="top: 32%;"></div>
         <div id="path-target" class="scroll-flag" style="top: 40%;"></div>
         <div id="path1-target" class="scroll-flag" style="top: 50%;"></div>
         <div id="path2-target" class="scroll-flag" style="top: 59%;"></div>
+        <div id="blank-target" class="scroll-flag" style="top: 68%;"></div>
         <div id="cv-target" class="scroll-flag" style="top: 77%;"></div>
+        <div id="moon" class="scroll-flag" style="top: 100%;"></div>
  
         <div class="planet earth">
-            <img src="images/earth.png" alt="Earth">
+            <img src="/Users/chocolaaaate/Library/CloudStorage/OneDrive-purdue.edu/code/personalwebsite/earth.png" alt="Earth">
 
         </div>
  
         <div class="space-content block-1">
-            <div class="test-box"><p>Ignition - Liftoff!</p></div>
+            <div class="test-box"><p>Ignition - Liftoff!</p>
+            <a href="#about-target" class="next-stage-arrow">
+            <span>▶</span> NEXT_SECTOR <span>◀</span>
+            </a>
+            </div>
         </div>
         
         <div class="space-content block-2">
@@ -79,13 +92,22 @@
                 <p>...but after years of working in the desert under Moonlight...</p>
                 <p>...I now work on the Moon!</p>
                 <p>...remotely! :]</p>
+
+                <a href="#about1-target" class="next-stage-arrow">
+                <span>▶</span> NEXT_SECTOR <span>◀</span>
+                </a>
             </div>
         </div>
         
         <div class="space-content block-3">
-            <div class="test-box"><p>Cruising past satellite networks...</p></div>
+            <div class="test-box"><p>Cruising past satellite networks...</p>
+                <a href="#path-target" class="next-stage-arrow">
+                <span>▶</span> NEXT_SECTOR <span>◀</span>
+                </a>
+            </div>
         </div>
-                <div class="space-content block-4">
+
+        <div class="space-content block-4">
             <div class="test-box"><h3>Stellar Path - Education</h3>
                 <p>UCIrvine (2013) B.S. - Mechanical Engineering</p>
                 <p>ASU (2025) B.S. - Geological and Planetary Science</p>
@@ -114,12 +136,18 @@
             <div class="test-box"><h3>Stellar Path - Experience</h3>
                 <p>View full cv:</p>
                 <p>Add link here</p>
+                <a href="#blank-target" class="next-stage-arrow">
+                <span>▶</span> NEXT_SECTOR <span>◀</span>
+                </a>
             </div>
         </div>
         
         <div class="space-content block-7">
-            <div class="test-box">
-                <p>Lunar gravity pull detected.</p></div>
+            <div class="test-box"><p>Lunar gravity pull detected.</p>
+                <a href="#cv-target" class="next-stage-arrow">
+                <span>▶</span> NEXT_SECTOR <span>◀</span>
+                </a>
+            </div>
         </div>
  
         <div class="space-content block-8">
@@ -128,9 +156,12 @@
                 <p>Send a transmission down the array to connect with pilot.</p>
                 <br>
                 <p>CONTACT@JACEINSPACE.COM</p>
+
+                <a href="#moon" class="next-stage-arrow">
+                <span>▶</span> NEXT_SECTOR <span>◀</span>
+                </a>
             </div>
         </div>
- 
         <div class="planet moon">
             <img src="images/Moon.png" alt="Moon">
             <h2>Welcome to the Moon</h2>
