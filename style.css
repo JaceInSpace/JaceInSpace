@@ -503,6 +503,45 @@ body:active {
     animation-range: 80% 90%; 
 }
 
+.next-stage-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 25px;
+    color: rgba(0, 255, 204, 0.6);
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    
+    /* Connect a gentle breathing animation */
+    animation: arrowFloat 2s infinite ease-in-out;
+}
+
+.next-stage-arrow span {
+    font-size: 12px;
+}
+
+/* Hover effect: illuminate arrow and lift restriction boundaries */
+.next-stage-arrow:hover {
+    color: #00ffcc;
+    text-shadow: 0 0 10px #00ffcc;
+}
+
+/* 🔄 GENTLE INSTRUMENT PANEL FLOATING MOTION */
+@keyframes arrowFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(5px); /* Drifts downward slightly */
+        color: #00ffcc;
+    }
+}
+
 #warp-canvas {
     position: fixed;
     top: 0;
