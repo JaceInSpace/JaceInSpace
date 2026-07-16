@@ -166,38 +166,38 @@ function resizeCanvas() {
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
-const numStars = 150;
+const numStars = 200; // Bumped up slightly for a denser 3D depth effect
 const stars = [];
+const MAX_DEPTH = 1000; // Outer horizon boundary
 let scrollVelocity = 0;
 let lastScrollY = window.scrollY;
 
-// Initialize Stars
+// Initialize Stars in 3D Space
 for (let i = 0; i < numStars; i++) {
     stars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        // Set base speed to 0 so they don't drift on their own
-        speedMultiplier: Math.random() * 1.5 + 0.5, 
+        // X and Y are distances from the center point of the screen
+        x: (Math.random() - 0.5) * canvas.width * 2,
+        y: (Math.random() - 0.5) * canvas.height * 2,
+        z: Math.random() * MAX_DEPTH, // Distributed randomly through depth layers
         size: Math.random() * 1.5 + 0.5
     });
 }
 
-// Track Scroll Speed / Velocity
+// Track Scroll Speed & Direction
 window.addEventListener('scroll', () => {
     const currentScrollY = window.scrollY;
     const delta = currentScrollY - lastScrollY;
     
-    // Give it a strong kick of velocity on scroll
-    scrollVelocity += Math.abs(delta) * 0.25; 
+    // Keeps sign (Positive = Forward/Down, Negative = Reverse/Up)
+    scrollVelocity += delta * 0.25; 
     
     lastScrollY = currentScrollY;
 });
 
 // Animation Loop
 function animateSpace() {
-    // If there is zero velocity, clear the canvas completely to keep stars crisp dots.
-    // If we are scrolling, use the transparent fill to create the streak trails.
-    if (scrollVelocity > 0.1) {
+    // Transparent layer for motion blur during fast motion, clean wipe when stationary
+    if (Math.abs(scrollVelocity) > 0.1) {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'; 
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     } else {
@@ -206,47 +206,73 @@ function animateSpace() {
 
     ctx.fillStyle = '#ffffff';
 
+    // Establish the operational center point of the screen
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+
     for (let i = 0; i < stars.length; i++) {
         let star = stars[i];
 
-        // Speed is entirely dependent on scroll velocity now
-        let currentSpeed = scrollVelocity * star.speedMultiplier;
-        
-        ctx.beginPath();
-        // Only draw streaks if moving fast enough
-        if (scrollVelocity > 1.5) {
-            ctx.strokeStyle = `rgba(255, 255, 255, ${Math.min(star.size, 1)})`;
-            ctx.lineWidth = star.size;
-            ctx.moveTo(star.x, star.y);
-            ctx.lineTo(star.x, star.y + currentSpeed * 0.3); 
-            ctx.stroke();
-        } else {
-            ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-            ctx.fill();
+        // 🏎️ Apply velocity directly to depth (Z-axis)
+        // Scrolling down subtracts from Z (stars rush towards you)
+        // Scrolling up adds to Z (stars recede away from you)
+        star.z -= scrollVelocity * 1.2;
+
+        // 🔄 Recycle boundaries if star passes camera or drops off deep space horizon
+        if (star.z <= 0) {
+            star.z = MAX_DEPTH;
+            star.x = (Math.random() - 0.5) * canvas.width * 2;
+            star.y = (Math.random() - 0.5) * canvas.height * 2;
+        } else if (star.z > MAX_DEPTH) {
+            star.z = 1; // Re-emerge right at the lens center
+            star.x = (Math.random() - 0.5) * canvas.width * 2;
+            star.y = (Math.random() - 0.5) * canvas.height * 2;
         }
 
-        // Apply movement
-        star.y += currentSpeed;
+        // 📐 3D Perspective Projection Formulas
+        const k = 128 / star.z;
+        const sx = star.x * k + cx;
+        const sy = star.y * k + cy;
 
-        // Recycle stars to the top or bottom edge depending on travel direction
-        if (star.y > canvas.height) {
-            star.y = 0;
-            star.x = Math.random() * canvas.width;
-        } else if (star.y < 0) {
-            star.y = canvas.height;
-            star.x = Math.random() * canvas.width;
+        // Skip calculations if projected coordinates land outside layout view ports
+        if (sx < 0 || sx > canvas.width || sy < 0 || sy > canvas.height) {
+            continue;
+        }
+
+        // Stars scale larger dynamically the closer they get to the front camera glass
+        const currentSize = (1 - star.z / MAX_DEPTH) * star.size * 2.5;
+
+        ctx.beginPath();
+        
+        // Render Streak Lines under heavy acceleration loads
+        if (Math.abs(scrollVelocity) > 1.5) {
+            ctx.strokeStyle = `rgba(255, 255, 255, ${Math.min(1 - star.z / MAX_DEPTH, 1)})`;
+            ctx.lineWidth = currentSize;
+            
+            // Calculate previous frame coordinates based on velocity offsets
+            const prevZ = star.z + (scrollVelocity * 0.4);
+            const prevK = 128 / prevZ;
+            const px = star.x * prevK + cx;
+            const py = star.y * prevK + cy;
+
+            ctx.moveTo(px, py);
+            ctx.lineTo(sx, sy);
+            ctx.stroke();
+        } else {
+            // Normal cruise rendering loops
+            ctx.arc(sx, sy, currentSize, 0, Math.PI * 2);
+            ctx.fill();
         }
     }
 
-    // Bring the stars to a quick, snappy halt when scrolling stops
+    // Decay parameters to lock movement gracefully when wheel scrolling stops
     scrollVelocity *= 0.85;
-    if (scrollVelocity < 0.05) scrollVelocity = 0;
+    if (Math.abs(scrollVelocity) < 0.05) scrollVelocity = 0;
 
     requestAnimationFrame(animateSpace);
 }
 
 animateSpace();
-
 </script>
 
 </body>
