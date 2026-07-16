@@ -529,6 +529,14 @@ body:active {
 .next-stage-arrow:hover {
     color: #00ffcc;
     text-shadow: 0 0 10px #00ffcc;
+    cursor: url("images/cursor.png") 0 18, pointer;
+}
+
+.next-stage-arrow:active {
+    animation: hudButtonFlash 0.35s ease-out forwards;
+    
+    /* 💥 Keeps the active "clicking" cursor active when pressing down */
+    cursor: url("images/cursor1.png") 0 18, pointer;
 }
 
 /* 🔄 GENTLE INSTRUMENT PANEL FLOATING MOTION */
