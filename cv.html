@@ -218,51 +218,50 @@
 
         /* --- PHYSICAL PAPER PRINT PROFILE --- */
         @media print {
-            /* 🎯 Strips out browser headers/footers (date, time, URL, titles) */
-            @page {
-                margin: 0.5in; 
-            }
+    /* 🎯 THE SYSTEM NUKE: Zero out the page container to kill browser headers/footers */
+    @page {
+        size: auto;   /* auto is current page size */
+        margin: 0mm;  /* 0mm completely destroys headers, footers, URLs, and dates */
+    }
 
-            body {
-                background: #ffffff !important;
-                color: #000000 !important;
-                padding: 0;
-                margin: 0; 
-            }
-            
-            .cv-container {
-                border: none !important;
-                box-shadow: none !important;
-                background: transparent !important;
-                padding: 0 !important;
-                max-width: 100% !important;
-            }
-            
-            /* Clean line below headers for paper layout */
-            .section-title {
-                color: #000000 !important;
-                border-bottom: 1px solid #000000 !important;
-            }
-            
-            /* Hide the navigation buttons/UI elements on the actual paper */
-            .nav-deck, .cv-terminal-btn, .section-title::after {
-                display: none !important;
-            }
-            
-            /* Force text color contrast for readability */
-            .entry-subtitle {
-                color: #111111 !important;
-            }
-            
-            .entry-details {
-                color: #222222 !important;
-            }
+    /* 🛡️ THE SAFEGUARD: Push your content back in so it doesn't get cut off by the printer */
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        margin: 0 !important;
+        padding: 20mm 15mm 20mm 15mm !important; /* Creates standard ~0.75in margins safely inside the page edge */
+    }
+    
+    .cv-container {
+        border: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+    }
+    
+    .section-title {
+        color: #000000 !important;
+        border-bottom: 1px solid #000000 !important;
+    }
+    
+    .nav-deck, .cv-terminal-btn, .section-title::after {
+        display: none !important;
+    }
+    
+    .entry-subtitle {
+        color: #111111 !important;
+    }
+    
+    .entry-details {
+        color: #222222 !important;
+    }
 
-            /* Disable custom sci-fi cursors when sending to printer */
-            html, body, a, button {
-                cursor: default !important;
-            }
-        }
+    html, body, a, button {
+        cursor: default !important;
+    }
+}
+        
     </style>
 </head>
 <body>
