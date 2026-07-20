@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PILOT_CV // JASON_LEE</title>
+    <style>
+        /* --- SYSTEM THEME CORE --- */
+        :root {
+            --bg-deep: #020808;
+            --terminal-green: #00ffcc;
+            --accent-red: #ff3366;
+            --text-bright: #ffffff;
+            --text-muted: #8ab4f8;
+            --border-low: rgba(0, 255, 204, 0.15);
+        }
+
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            background-color: var(--bg-deep);
+            color: var(--text-bright);
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.5;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* --- PRINTABLE GRID CONTAINER --- */
+        .cv-container {
+            width: 100%;
+            max-width: 800px;
+            background: rgba(0, 20, 20, 0.4);
+            border: 1px solid var(--border-low);
+            border-radius: 8px;
+            padding: 40px;
+            box-sizing: border-box;
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.02);
+        }
+
+        /* --- TOP TELEMETRY ZONE (HEADER) --- */
+        .cv-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid var(--terminal-green);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .pilot-identity h1 {
+            margin: 0 0 5px 0;
+            font-size: 28px;
+            letter-spacing: 2px;
+            color: var(--text-bright);
+        }
+
+        .pilot-identity .callsign {
+            color: var(--terminal-green);
+            font-weight: bold;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .comms-channels {
+            text-align: right;
+            font-size: 12px;
+        }
+
+        .comms-channels a {
+            color: var(--text-muted);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .comms-channels a:hover {
+            color: var(--terminal-green);
+            text-decoration: underline;
+        }
+
+        /* --- CV SECTIONS --- */
+        .briefing-section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            color: var(--accent-red);
+            letter-spacing: 2px;
+            margin: 0 0 15px 0;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .section-title::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: var(--border-low);
+            margin-left: 15px;
+        }
+
+        /* --- EXPERIENCES & CHRONOLOGY --- */
+        .entry-block {
+            margin-bottom: 20px;
+        }
+
+        .entry-meta {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 14px;
+            color: var(--text-bright);
+            margin-bottom: 4px;
+        }
+
+        .entry-subtitle {
+            font-size: 13px;
+            color: var(--terminal-green);
+            margin-bottom: 8px;
+        }
+
+        .entry-details {
+            margin: 0;
+            padding-left: 18px;
+            font-size: 13px;
+            color: #b0c4de;
+        }
+
+        .entry-details li {
+            margin-bottom: 6px;
+        }
+
+        /* --- UTILITY GRIDS (SKILLS / CORE) --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: rgba(0, 255, 204, 0.05);
+            border: 1px solid var(--border-low);
+            padding: 6px 10px;
+            font-size: 11px;
+            text-align: center;
+            border-radius: 4px;
+            color: var(--terminal-green);
+        }
+
+        /* --- RETURN ACTION TABS --- */
+        .nav-deck {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--border-low);
+        }
+
+        .deck-btn {
+            font-family: monospace;
+            font-size: 12px;
+            color: var(--text-bright);
+            background: transparent;
+            border: 1px solid var(--text-bright);
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .deck-btn:hover {
+            background: var(--text-bright);
+            color: var(--bg-deep);
+        }
+
+        .deck-btn.return {
+            border-color: var(--terminal-green);
+            color: var(--terminal-green);
+        }
+
+        .deck-btn.return:hover {
+            background: var(--terminal-green);
+            color: var(--bg-deep);
+        }
+
+        /* --- PHYSICAL PAPER PRINT PROFILE --- */
+        @media print {
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+                padding: 0;
+            }
+            .cv-container {
+                border: none !important;
+                box-shadow: none !important;
+                background: transparent !important;
+                padding: 0 !important;
+                max-width: 100% !important;
+            }
+            .section-title {
+                color: #000000 !important;
+                border-bottom: 1px solid #000000;
+            }
+            .section-title::after, .nav-deck, .panel-light {
+                display: none !important;
+            }
+            .entry-subtitle, .skill-tag {
+                color: #333333 !important;
+                background: transparent !important;
+                border: 1px solid #cccccc !important;
+            }
+            .entry-details {
+                color: #111111 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cv-container">
+        
+        <!-- HEADER MODULE -->
+        <header class="cv-header">
+            <div class="pilot-identity">
+                <h1>JASON LEE</h1>
+                <div class="callsign">SEC_ROLE // ACADEMIC_PORTFOLIO</div>
+            </div>
+            <div class="comms-channels">
+                <a href="mailto:your.email@purdue.edu">EMAIL // jason@purdue.edu</a>
+                <a href="https://github.com/yourusername" target="_blank">GIT // github.com/jason</a>
+                <a href="https://linkedin.com/in/yourusername" target="_blank">NET // linkedin.com/in/jason</a>
+            </div>
+        </header>
+
+        <!-- EDUCATION SECTION -->
+        <section class="briefing-section">
+            <div class="section-title">01 // ACADEMIC_RECORD</div>
+            <div class="entry-block">
+                <div class="entry-meta">
+                    <span>PURDUE UNIVERSITY</span>
+                    <span>2024 — PRESENT</span>
+                </div>
+                <div class="entry-subtitle">B.S. Computer Science (or Your Exact Major)</div>
+                <ul class="entry-details">
+                    <li>Relevant Coursework: Data Structures, Systems Programming, Web Architecture.</li>
+                    <li>Academic Milestones or Club involvement details go here.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE SECTION -->
+        <section class="briefing-section">
+            <div class="section-title">02 // MISSION_LOG (EXPERIENCE)</div>
+            
+            <div class="entry-block">
+                <div class="entry-meta">
+                    <span>SOFTWARE ENGINEERING INTERN</span>
+                    <span>SUMMER 2026</span>
+                </div>
+                <div class="entry-subtitle">Star Fleet Labs / Company Name</div>
+                <ul class="entry-details">
+                    <li>Engineered performant client interfaces using highly fluid frontend systems.</li>
+                    <li>Optimized data telemetry pipelines, decreasing load latency by 20%.</li>
+                    <li>Collaborated across agile engineering pods to ship production-ready assets.</li>
+                </ul>
+            </div>
+
+            <div class="entry-block">
+                <div class="entry-meta">
+                    <span>UNDERGRADUATE RESEARCHER</span>
+                    <span>2025 — PRESENT</span>
+                </div>
+                <div class="entry-subtitle">Purdue Systems Laboratory</div>
+                <ul class="entry-details">
+                    <li>Developed custom browser interface frameworks for data parsing operations.</li>
+                    <li>Managed Git repositories and synchronized structural project branches.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section class="briefing-section">
+            <div class="section-title">03 // TACTICAL_DEPLOYMENTS (PROJECTS)</div>
+            <div class="entry-block">
+                <div class="entry-meta">
+                    <span>SCIFI COCKPIT ORBITAL INTERFACE</span>
+                    <span>2026</span>
+                </div>
+                <div class="entry-subtitle">Personal Portfolio Architecture</div>
+                <ul class="entry-details">
+                    <li>Built a custom 5-stage parallax document pipeline utilizing hardware-accelerated canvas warp animations.</li>
+                    <li>Integrated customized mathematical odometer telemetry units to monitor layout navigation states.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- TECH SKILLS MODULE -->
+        <section class="briefing-section">
+            <div class="section-title">04 // SYSTEMS_CAPABILITIES (SKILLS)</div>
+            <div class="skills-grid">
+                <div class="skill-tag">HTML5 / CSS3</div>
+                <div class="skill-tag">JAVASCRIPT</div>
+                <div class="skill-tag">GIT / GITHUB</div>
+                <div class="skill-tag">VS CODE</div>
+                <div class="skill-tag">PYTHON</div>
+                <div class="skill-tag">C / C++</div>
+            </div>
+        </section>
+
+        <!-- COMMAND DECK NAVIGATION -->
+        <div class="nav-deck">
+            <a href="index.html" class="deck-btn return">&lt; RETURN_TO_COCKPIT</a>
+            <button onclick="window.print()" class="deck-btn">PRINT_HARDCOPY (PDF) 📄</button>
+        </div>
+
+    </div>
+
+</body>
+</html>
