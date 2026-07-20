@@ -218,11 +218,18 @@
 
         /* --- PHYSICAL PAPER PRINT PROFILE --- */
         @media print {
+            /* 🎯 Strips out browser headers/footers (date, time, URL, titles) */
+            @page {
+                margin: 0.5in; 
+            }
+
             body {
                 background: #ffffff !important;
                 color: #000000 !important;
                 padding: 0;
+                margin: 0; 
             }
+            
             .cv-container {
                 border: none !important;
                 box-shadow: none !important;
@@ -230,20 +237,30 @@
                 padding: 0 !important;
                 max-width: 100% !important;
             }
+            
+            /* Clean line below headers for paper layout */
             .section-title {
                 color: #000000 !important;
-                border-bottom: 1px solid #000000;
+                border-bottom: 1px solid #000000 !important;
             }
-            .section-title::after, .nav-deck {
+            
+            /* Hide the navigation buttons/UI elements on the actual paper */
+            .nav-deck, .cv-terminal-btn, .section-title::after {
                 display: none !important;
             }
-            .entry-subtitle, .skill-tag {
-                color: #333333 !important;
-                background: transparent !important;
-                border: 1px solid #cccccc !important;
-            }
-            .entry-details {
+            
+            /* Force text color contrast for readability */
+            .entry-subtitle {
                 color: #111111 !important;
+            }
+            
+            .entry-details {
+                color: #222222 !important;
+            }
+
+            /* Disable custom sci-fi cursors when sending to printer */
+            html, body, a, button {
+                cursor: default !important;
             }
         }
     </style>
