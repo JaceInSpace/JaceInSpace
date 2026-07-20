@@ -710,23 +710,28 @@ body:active {
     border-color: var(--bg-space);
 }
 
-/* Sub-code label telemetry string */
+/* --- TACTICAL CV LINK BUTTON TEXT ACCENTS --- */
 .btn-code-tag {
     font-size: 10px;
     opacity: 0.6;
     color: var(--text-muted);
 }
+
 .cv-terminal-btn:hover .btn-code-tag {
     color: var(--bg-space);
     opacity: 0.9;
-    cursor: url("images/cursor.png") 0 18, pointer;
 }
 
-.cv-terminal-btn:active .btn-code-tag {
+/* --- 🎯 THE FIXED CURSOR OVERRIDES --- */
+/* Target the actual button container for the hover state */
+.cv-terminal-btn:hover {
+    cursor: url("images/cursor.png") 0 18, pointer !important;
+}
+
+/* Target the actual button container for the clicking animation and asset swap */
+.cv-terminal-btn:active {
     animation: hudButtonFlash 0.35s ease-out forwards;
-    
-    /* Keeps the active "clicking" cursor active when pressing down on links */
-    cursor: url("images/cursor1.png") 0 18, pointer;
+    cursor: url("images/cursor1.png") 0 18, pointer !important;
 }
 
 /* Ensure your text and planet layers sit above the moving stars */
