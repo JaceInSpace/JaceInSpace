@@ -28,6 +28,10 @@
             cursor: url("images/cursor.png") 0 18, auto;
         }
 
+        body:active {
+            cursor: url("images/cursor1.png") 0 18, auto;
+        }
+        
         /* --- PRINTABLE GRID CONTAINER --- */
         .cv-container {
             width: 100%;
@@ -177,6 +181,13 @@
         .deck-btn:hover {
             background: var(--text-bright);
             color: var(--bg-deep);
+            cursor: url("images/cursor.png") 0 18, pointer;
+        }
+        .deck-btn:active {
+            animation: hudButtonFlash 0.35s ease-out forwards;
+    
+            /* Keeps the active "clicking" cursor active when pressing down on links */
+            cursor: url("images/cursor1.png") 0 18, pointer;
         }
 
         .deck-btn.return {
@@ -187,6 +198,14 @@
         .deck-btn.return:hover {
             background: var(--terminal-green);
             color: var(--bg-deep);
+            cursor: url("images/cursor.png") 0 18, pointer;
+        }
+
+        .deck-btn.return:active {
+            animation: hudButtonFlash 0.35s ease-out forwards;
+    
+            /* Keeps the active "clicking" cursor active when pressing down on links */
+            cursor: url("images/cursor1.png") 0 18, pointer;
         }
 
         /* --- PHYSICAL PAPER PRINT PROFILE --- */
