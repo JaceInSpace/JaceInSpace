@@ -83,6 +83,14 @@
         .comms-channels a:hover {
             color: var(--terminal-green);
             text-decoration: underline;
+            cursor: url("images/cursor.png") 0 18, pointer;
+        }
+
+        .comms-channels a:active {
+            animation: hudButtonFlash 0.35s ease-out forwards;
+    
+            /* Keeps the active "clicking" cursor active when pressing down on links */
+            cursor: url("images/cursor1.png") 0 18, pointer;
         }
 
         /* --- CV SECTIONS --- */
