@@ -719,6 +719,14 @@ body:active {
 .cv-terminal-btn:hover .btn-code-tag {
     color: var(--bg-space);
     opacity: 0.9;
+    cursor: url("images/cursor.png") 0 18, pointer;
+}
+
+.cv-terminal-btn:active .btn-code-tag {
+    animation: hudButtonFlash 0.35s ease-out forwards;
+    
+    /* Keeps the active "clicking" cursor active when pressing down on links */
+    cursor: url("images/cursor1.png") 0 18, pointer;
 }
 
 /* Ensure your text and planet layers sit above the moving stars */
