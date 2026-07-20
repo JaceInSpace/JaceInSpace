@@ -636,6 +636,91 @@ body:active {
     pointer-events: none; /* Allows clicks to pass through to your portfolio links */
 }
 
+/* ==========================================================================
+   TACTICAL CV LINK BUTTON
+   ========================================================================== */
+.cv-link-wrapper {
+    margin-top: 25px;
+    display: inline-block;
+}
+
+.cv-terminal-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0, 255, 204, 0.03);
+    color: var(--terminal-green);
+    border: 1px solid var(--hud-border);
+    padding: 12px 24px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 2px;
+    position: relative;
+    text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    border-radius: 4px;
+}
+
+/* Bracket Accents for the Corners */
+.cv-terminal-btn::before,
+.cv-terminal-btn::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-color: var(--terminal-green);
+    border-style: solid;
+    transition: all 0.3s ease;
+}
+
+/* Top Left Bracket Corner */
+.cv-terminal-btn::before {
+    top: -2px;
+    left: -2px;
+    border-width: 1px 0 0 1px;
+}
+
+/* Bottom Right Bracket Corner */
+.cv-terminal-btn::after {
+    bottom: -2px;
+    right: -2px;
+    border-width: 0 1px 1px 0;
+}
+
+/* --- TELEMETRY HOVER ANIMATION --- */
+.cv-terminal-btn:hover {
+    color: var(--bg-space);
+    background: var(--terminal-green);
+    border-color: var(--terminal-green);
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+}
+
+/* Collapse the brackets tightly into the button on hover */
+.cv-terminal-btn:hover::before {
+    top: 3px;
+    left: 3px;
+    border-color: var(--bg-space);
+}
+
+.cv-terminal-btn:hover::after {
+    bottom: 3px;
+    right: 3px;
+    border-color: var(--bg-space);
+}
+
+/* Sub-code label telemetry string */
+.btn-code-tag {
+    font-size: 10px;
+    opacity: 0.6;
+    color: var(--text-muted);
+}
+.cv-terminal-btn:hover .btn-code-tag {
+    color: var(--bg-space);
+    opacity: 0.9;
+}
+
 /* Ensure your text and planet layers sit above the moving stars */
 .planet { z-index: 3; }
 .space-content { z-index: 4; }
